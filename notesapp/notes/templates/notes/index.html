@@ -1,0 +1,20 @@
+{% extends 'notes/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <ul class="notes">
+        {% for note in object_list %}
+        <li>
+            <div class="rotate-1 lazur-bg">
+                <h4>{{ note.note_title }}</h4>
+                <p>{{ note.note_text }}</p>
+                <a href="#" class="text-danger pull-right"><i class="fas fa-trash-alt"></i></a>
+            </div>
+        </li>
+        {% endfor %} 
+    </ul>  
+</div>
+</div>
+
+{% endblock %}
