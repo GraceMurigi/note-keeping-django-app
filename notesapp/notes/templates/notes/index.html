@@ -1,16 +1,21 @@
-{% extends 'notes/base.html' %}
+{% extends 'notes/__base.html' %}
 
 {% block content %}
-
+<div class="row">
+    <button type="button" class="btn btn-primary"><a href="{% url 'notes:create-note' %}"> add note</a></button>
+</div>
 <div class="row">
     <ul class="notes">
         {% for note in object_list %}
         <li>
             <div class="rotate-1 lazur-bg">
-                <h4>{{ note.note_title }}</h4>
+                <h4 style="text-decoration: underline; text-transform: uppercase;">{{ note.note_title }}</h4>
                 <p>{{ note.note_text }}</p>
-                <a href="#" class="text-danger pull-right"><i class="fas fa-trash-alt"></i></a>
+                <br>
+                <a href="{% url 'notes:edit-note' note.id %}" class="text-dark pull-left">edit</a>
+                <a href="{% url 'notes:delete-note' note.id %}" class="text-dark pull-right">delete</a>
             </div>
+            
         </li>
         {% endfor %} 
     </ul>  

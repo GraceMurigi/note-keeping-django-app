@@ -1,17 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView
+
+# import edit views classes
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+# urls
 
 # import model 
 from .models import Note
 # import form 
 from .forms import NoteForm
-# Create your views here.
 
-class IndexView(ListView):
+
+# view to display all notes 
+class NoteListView(ListView):
 	model = Note
 	template_name = 'notes/index.html'
-	queryset = Note.objects.all()
+	queryset = Note.objects.all().order_by('-pk')
 
 	# template_name = 'notes/index.html'
 	# context_object_name = 'latest_notes'
@@ -20,28 +27,20 @@ class IndexView(ListView):
 	# 	"""return the last six notes"""
 	# 	return Note.objects.filter().order_by('-id')[:5]
 
+# create a note 
+class NoteCreateView(CreateView):
+	model = Note
+	form_class = NoteForm
+	template_name = 'notes/create-note.html'
+	# use namespace to avoid NoReverseMatchError
+	success_url = reverse_lazy('notes:note-list')
 
+class NoteEditView(UpdateView):
+	model = Note
+	form_class = NoteForm
+	template_name ='notes/edit-note.html'
+	success_url = reverse_lazy('notes:note-list')
 
-# create and save a new note 
-def add_note(request):
-	if request.method == 'POST':
-		form = NoteForm(request.POST)
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect('/notes/')
-	else: 
-		form = NoteForm()
-	return render(request, 'notes/create-note.html', {'form': form})
-
-
-
-
-# class IndexView(generic.ListView):
-# 	model = Note
-# 	template_name = 'notes/index.html'
-# 	context_object_name = 'latest_notes'
-
-	# def get_queryset(self): 
-	# 	"""return the last five notes"""
-	# 	return Note.objects.filter(
-	# 		pub)
+class NoteDeleteView(DeleteView):
+	model = Note
+	success_url = reverse_lazy('notes:note-list')
