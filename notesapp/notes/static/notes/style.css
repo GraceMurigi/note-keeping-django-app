@@ -2,24 +2,20 @@
 body {
   margin-top:20px;
   background-color: aliceblue;
+  font-size: 1rem;
+  
 }
 
-
-ul.notes li {
-  margin: 10px 40px 50px 0px;
-  float: left;
+h1.title {
+  text-align: center;
 }
 
-ul.notes li, ul.tag-list li {
-  list-style: none;
+p.headings {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: capitalize;
 }
 
-ul.notes li div small {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  font-size: 10px;
-}
 
 div.rotate-1 {
   -webkit-transform: rotate(-6deg);
@@ -55,12 +51,17 @@ div.rotate-2 {
   color: #ffffff;
 }
 
-ul.notes li div {
+.notes {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1;
+  justify-content: space-evenly;
+  /* width: 250px; */
+}
+.note-box {
+  width: 250px;
   text-decoration: none;
   color: #000;
-  display: block;
-  height: 210px;
-  width: 210px;
   padding: 1em;
   -moz-box-shadow: 5px 5px 7px #212121;
   -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
@@ -69,4 +70,3 @@ ul.notes li div {
   -o-transition: -o-transform 0.15s linear;
   -webkit-transition: -webkit-transform 0.15s linear;
 }
-

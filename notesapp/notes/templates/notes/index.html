@@ -1,24 +1,22 @@
 {% extends 'notes/__base.html' %}
 
 {% block content %}
+<h1 class="title">My Notes App</h1>
 <div class="row">
-    <button type="button" class="btn btn-primary"><a href="{% url 'notes:create-note' %}"> add note</a></button>
+    <a class="btn btn-success text-white" href="{% url 'notes:create-note' %}" role="button">add note</a>
 </div>
 <div class="row">
-    <ul class="notes">
+    <div class="notes">
         {% for note in object_list %}
-        <li>
-            <div class="rotate-1 lazur-bg">
-                <h4 style="text-decoration: underline; text-transform: uppercase;">{{ note.note_title }}</h4>
+            <div id="note-box" class="lazur-bg rotate-1 note-box">
+                <p class="headings">{{ note.note_title }}</p>
                 <p>{{ note.note_text }}</p>
                 <br>
                 <a href="{% url 'notes:edit-note' note.id %}" class="text-dark pull-left">edit</a>
                 <a href="{% url 'notes:delete-note' note.id %}" class="text-dark pull-right">delete</a>
-            </div>
-            
-        </li>
+            </div>            
         {% endfor %} 
-    </ul>  
+    </div>
 </div>
 </div>
 
