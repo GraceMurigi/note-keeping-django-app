@@ -1,4 +1,4 @@
-<img src="notesapp.png" title="" alt="notes app">
+<img src="./notesapp.png" title="" alt="notes app">
 
 
 # note-keeping-django-app 
